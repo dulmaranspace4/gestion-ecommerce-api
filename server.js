@@ -3,23 +3,24 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const app = express();
 
-// Charger les variables d'environnement
+// Load environment variables
 dotenv.config();
 
-// Middleware
+// Middleware to parse JSON requests
 app.use(express.json());
 
-// Connexion à MongoDB
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connecté à MongoDB'))
-  .catch(err => console.error('Erreur de connexion à MongoDB', err));
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Connection error to MongoDB', err));
 
-// Routes
+// Define routes
 app.get('/', (req, res) => {
-  res.send('API E-commerce en cours d\'exécution');
+  res.send('E-commerce API is running');
 });
 
+// Set the port and start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port ${PORT}`);
+  console.log(`Server started on port ${PORT}`);
 });
